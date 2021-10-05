@@ -2,12 +2,55 @@ import LandingPage from "./LandingPage.js";
 import Quiz from "./Quiz.js";
 import FinalScore from "./FInalScore.js";
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import realtime from './firebase.js';
+import {ref, onValue, push, remove} from 'firebase/database';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentQuiz, setCurrentQuiz] = useState([]);
   const [score, setScore] = useState(0);
+  const [highScoreArray, setHighScoreArray] = useState([]);
+
+  //function that takes our database object that we get and pushes each object inside. the object with the highest userScore is at index 0 and the next lowest score is 1, etc. It should be a maximum length of 10
+
+  const orderDatabase = (databaseObj) => {
+    const highScore = [];
+    
+    for (let scoreObj in databaseObj) {
+      const newScoreObj = {...databaseObj[scoreObj], scoreKey: scoreObj};
+      //logic that determines where each newScoreObj is spliced into highScoreArray
+      //checks every possible spot in the array. When it finds a spot where it is above a number in userScore or the spot is undefined/ has no obj, it splices its value just before.
+      for (let i = 0; i < 9; i++) {
+        console.log(i);
+        if (highScore[i] === undefined || highScore[i].userScore <= newScoreObj.userScore) {
+          highScore.splice(i, 0, newScoreObj);
+          i += 9;
+        }
+      }
+    }
+    console.log(highScore);
+  };
+
+  //set up our database subscription, and call orderDatabase on the response object before passing it into state
+  useEffect(() => {
+    const dbRef = ref(realtime);
+
+    onValue(dbRef, (snapshot) => {
+      const currentDatabase = snapshot.val();
+      orderDatabase(currentDatabase);
+    })
+  }, []);
+
+  const testPush = () => {
+    const dbRef =ref(realtime);
+    push(dbRef, 
+      {
+        userName: "CSS",
+        userScore: 80
+      }
+      )
+  };
 
   return (
     <div className="App">
@@ -23,6 +66,7 @@ function App() {
       </header>
 
       <main>
+        <button onClick={testPush}>Test push</button>
         {
           currentPage === 1 ?
           <LandingPage 
