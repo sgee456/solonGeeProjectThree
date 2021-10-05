@@ -245,11 +245,6 @@ h2 {
 /* media queries */
 
 @media (max-width: 760px) {
-    .App {
-        min-height: 0;
-        display: block;
-    }
-
     .landingForm {
         padding: 60px 0;
     }
@@ -293,11 +288,27 @@ h2 {
 
 @media (max-width: 560px) {
     main {
+        flex-grow: 1;
+        flex-direction: column;
+        display: flex;
         padding: 0;
     }
 
     main .wrapper {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quizForm, .landingForm {
+        width: 100%;
+    }
+
+    .playAgain {
+        max-width: 209px;
     }
     
 }

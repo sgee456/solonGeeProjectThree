@@ -9,8 +9,6 @@ function App() {
   const [currentQuiz, setCurrentQuiz] = useState([]);
   const [score, setScore] = useState(0);
 
-  //I think I should only pass what I need from currentQuiz to Quiz?
-
   return (
     <div className="App">
       <header>

@@ -11,7 +11,7 @@ function Radio({currentAnswerSet, setUserInput}) {
     
                 return(
     
-                    <div className="choiceContainer" key={index}>
+                    <div className="choiceContainer" key={"choice" + index}>
                         <label 
                             htmlFor={`answer${index}`} 
                             dangerouslySetInnerHTML={{__html: answerString}}>
