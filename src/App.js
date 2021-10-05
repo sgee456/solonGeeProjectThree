@@ -5,6 +5,7 @@ import FinalScore from "./FInalScore.js";
 import {useEffect, useState} from 'react';
 import realtime from './firebase.js';
 import {ref, onValue, push, remove} from 'firebase/database';
+import HighScore from "./HighScore.js";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,14 +23,13 @@ function App() {
       //logic that determines where each newScoreObj is spliced into highScoreArray
       //checks every possible spot in the array. When it finds a spot where it is above a number in userScore or the spot is undefined/ has no obj, it splices its value just before.
       for (let i = 0; i < 9; i++) {
-        console.log(i);
         if (highScore[i] === undefined || highScore[i].userScore <= newScoreObj.userScore) {
           highScore.splice(i, 0, newScoreObj);
           i += 9;
         }
       }
     }
-    console.log(highScore);
+    setHighScoreArray(highScore);
   };
 
   //set up our database subscription, and call orderDatabase on the response object before passing it into state
@@ -92,7 +92,13 @@ function App() {
             quizLength={currentQuiz.length}
             setCurrentPage= {setCurrentPage}
             setScore= {setScore}
+            highScoreArray= {highScoreArray}
             /> :
+          ""
+        }
+        {
+          currentPage === 4 ?
+          <HighScore /> :
           ""
         }
       </main>
