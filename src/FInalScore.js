@@ -29,7 +29,6 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
             alert('Please enter your name.');
         }
         if (name !== "" && highScoreArray.length > 9) {
-            console.log(name);
             const lastScoreIndex = highScoreArray.length - 1;
             const lastScoreKey = highScoreArray[lastScoreIndex].scoreKey;
             const lastScoreRef = ref(realtime, lastScoreKey);
