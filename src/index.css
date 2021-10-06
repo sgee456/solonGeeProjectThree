@@ -11,37 +11,23 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
  /* color scheme*/
 
 :root {
-    /* --alabaster: */
-    --lightGrey: #f1f2ebff;
-    /* --timberwolf:  */
-    --mediumGrey: #d8dad3ff;
-    /* --cambridge-blue */
+    
     --secondaryColor: #a4c2a5ff;
-    /* --ebony */
+
     --primaryColor: #566246ff;
-
-    --darkerPrimaryColor: #414b34;
     --darkerPrimaryColor: #2b3122;
-    /* --davys-grey: */
     
-    /* --accentColor: #291528; */
     --accentColor: #2589BD;
-    
-    --lighterAccentColor: #29698b;
 
-    --AccentColorTwo: #482728;
-    --darkGrey: #4a4a48ff;
+    --lightGrey: #f1f2ebff;
+    --mediumGrey: #d8dad3ff;
     --darkGrey: #61615e;
 
     --white: #FAFAFA;
     --black: #232323;
 }
 
-/* font choice
-primary font:
-secondary font: */
-/* 
-@import url('https://fonts.googleapis.com/css2?family=Ephesis&family=Roboto&display=swap'); */
+/* font choice */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=Roboto:ital,wght@1,900&display=swap');
 
@@ -68,7 +54,7 @@ p, label, select, input, button {
     font-size: 2.4rem;
 }
 
-button, select, input {
+select, input {
     color: var(--white);
     background-color: var(--darkGrey);
     border: none;
@@ -78,6 +64,7 @@ button, select, input {
 button {
     color: var(--white);
     background-color: var(--accentColor);
+    border: none;
     padding: 10px 40px;
     transition:color 0.2s, background-color 0.2s;
 }
@@ -119,8 +106,6 @@ h2 {
 }
 
 header {
-    
-    /* background-color:var(--primaryColor); */
     background: linear-gradient( to right,
     var(--darkerPrimaryColor),
     var(--primaryColor) 33%,
@@ -134,7 +119,6 @@ main {
 }
 
 footer {
-    /* background-color: var(--primaryColor); */
     background: linear-gradient( to right,
     var(--darkerPrimaryColor),
     var(--primaryColor) 33%,
