@@ -5,7 +5,6 @@ function LandingPage({setupQuiz, setupPage}) {
     const [category, setCategory] = useState("all");
     const [difficulty, setDifficulty] = useState("all");
     const [type, setType] = useState("all");
-    const [noResults, setNoResults] = useState(false);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -37,7 +36,7 @@ function LandingPage({setupQuiz, setupPage}) {
                 setupQuiz(jsonRes.results);
                 setupPage(2);
             } else {
-                setNoResults(true);
+                alert('There were no results for that search.');
             }
             
         });
@@ -46,11 +45,6 @@ function LandingPage({setupQuiz, setupPage}) {
     return(
         <>
             <div className="wrapper">
-                {
-                    noResults?
-                    <p>I'm sorry, there were no results for that search.</p>:
-                    ""
-                }
                 <form className="landingForm" onSubmit={handleSubmit}>
                     <div className="landingContainer questionNumber">
                         <label htmlFor="numberOfQuestions">Number of questions: </label>
