@@ -27,7 +27,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
     /* --accentColor: #291528; */
     --accentColor: #2589BD;
     
-    --lighterAccentColor: #275974;
+    --lighterAccentColor: #29698b;
 
     --AccentColorTwo: #482728;
     --darkGrey: #4a4a48ff;
@@ -76,13 +76,15 @@ button, select, input {
 }
 
 button {
+    color: var(--white);
     background-color: var(--accentColor);
     padding: 10px 40px;
-    transition: background-color 0.2s;
+    transition:color 0.2s, background-color 0.2s;
 }
 
 button:hover {
-    background-color: var(--lighterAccentColor);
+    color: var(--accentColor);
+    background-color: var(--white);
 }
 
 a {

@@ -1,3 +1,5 @@
+import {decode} from 'html-entities';
+
 function Radio({currentAnswerSet, setUserInput, userInput}) {
     function handleChange(event) {
         setUserInput(event.target.value);
@@ -8,14 +10,12 @@ function Radio({currentAnswerSet, setUserInput, userInput}) {
             {currentAnswerSet.map((question, index) => {
                 //set to allow html entities to properly display
                 const answerString = `${question.answer}`;
+                const decodedAnswerString = decode(answerString);
     
                 return(
     
                     <div className="choiceContainer" key={"choice" + index}>
-                        <label 
-                            htmlFor={`answer${index}`} 
-                            dangerouslySetInnerHTML={{__html: answerString}}>
-                        </label>
+                        <label htmlFor={`answer${index}`}>{decodedAnswerString}</label>
                         <input 
                             name="quizAnswer"
                             type="radio" 

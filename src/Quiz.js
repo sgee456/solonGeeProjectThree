@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {decode} from 'html-entities';
 
 import Radio from './Quiz/Radio.js';
 import Score from './Quiz/Score.js';
@@ -83,7 +84,10 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
 
     //sets html in order for html entities to work
     const htmlQuestion = quizInfo[currentQuestion].question
+    const decodedHtmlQuestion = decode(htmlQuestion)
+
     const htmlCorrectAnswer = quizInfo[currentQuestion].correct_answer
+    const decodedHtmlAnswer = decode(htmlCorrectAnswer);
 
     return(
         <>
@@ -93,10 +97,7 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
                     className="quizForm"
                     onSubmit={handleSubmit}
                 >
-                    <h2
-                        className="questionHeader" 
-                        dangerouslySetInnerHTML={{__html: htmlQuestion}}>
-                    </h2>
+                    <h2 className="questionHeader">{decodedHtmlQuestion}</h2>
                     <Radio currentAnswerSet={currentAnswerSet} setUserInput={setUserInput}
                     userInput={userInput} />
 
@@ -104,7 +105,7 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
                         <button type="submit">Submit</button>:
                         answerCorrect ?
                             <p>Correct!</p>:
-                            <p>Incorrect... The correct answer is <span dangerouslySetInnerHTML={{__html: htmlCorrectAnswer}}></span>.
+                            <p>Incorrect... The correct answer is <span>{decodedHtmlAnswer}</span>.
                             </p>
                     }
 
