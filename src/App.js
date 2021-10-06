@@ -4,7 +4,7 @@ import FinalScore from "./FInalScore.js";
 
 import {useEffect, useState} from 'react';
 import realtime from './firebase.js';
-import {ref, onValue, push, remove} from 'firebase/database';
+import {ref, onValue} from 'firebase/database';
 import HighScore from "./HighScore.js";
 
 function App() {
