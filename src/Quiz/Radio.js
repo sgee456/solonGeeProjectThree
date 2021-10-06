@@ -1,6 +1,6 @@
-function Radio({currentAnswerSet, setUserInput}) {
+function Radio({currentAnswerSet, setUserInput, userInput}) {
     function handleChange(event) {
-        setUserInput(event.target.id);
+        setUserInput(event.target.value);
     };
 
     return (
@@ -19,9 +19,9 @@ function Radio({currentAnswerSet, setUserInput}) {
                         <input 
                             name="quizAnswer"
                             type="radio" 
-                            id ={`answer${index}`}
-                            value={question.isCorrect}
+                            value={`answer${index}`}
                             onChange={handleChange}
+                            checked={userInput === `answer${index}`}
                         />
                     </div>
                 );

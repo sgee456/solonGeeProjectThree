@@ -97,7 +97,8 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
                         className="questionHeader" 
                         dangerouslySetInnerHTML={{__html: htmlQuestion}}>
                     </h2>
-                    <Radio currentAnswerSet={currentAnswerSet} setUserInput={setUserInput} />
+                    <Radio currentAnswerSet={currentAnswerSet} setUserInput={setUserInput}
+                    userInput={userInput} />
 
                     { buttonShow ?
                         <button type="submit">Submit</button>:
