@@ -13,7 +13,7 @@ function HighScore({setScore, highScoreArray, setCurrentPage}) {
                         highScoreArray.map((scoreObj, index) =>{
                             return(
                                 <li key={scoreObj.scoreKey}>
-                                    <p><span classname="bold">{index + 1}. </span>{scoreObj.userName} </p>
+                                    <p><span className="bold">{index + 1}. </span>{scoreObj.userName} </p>
                                     <p>{scoreObj.userScore} {scoreObj.userScore === 1?"point": "points"}</p>
                                 </li>
                             );
