@@ -59,6 +59,12 @@ select, input {
     background-color: var(--darkGrey);
     border: none;
     padding: 10px;
+    transition:color 0.2s, background-color 0.2s;
+}
+
+select:hover, input:hover {
+    color: var(--black);
+    background-color: var(--lightGrey);
 }
 
 button {
@@ -197,6 +203,15 @@ h1 {
 .quizForm label {
     flex-grow: 1;
     text-align: left;
+}
+
+.quizForm input {
+    transition: none;
+}
+
+.quizForm input:hover {
+    color: var(--white);
+    background-color: var(--darkGrey);
 }
 
 .quizForm button {
