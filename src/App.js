@@ -42,16 +42,6 @@ function App() {
     })
   }, []);
 
-  const testPush = () => {
-    const dbRef =ref(realtime);
-    push(dbRef, 
-      {
-        userName: "CSS",
-        userScore: 80
-      }
-      )
-  };
-
   return (
     <div className="App">
       <header>
@@ -66,7 +56,6 @@ function App() {
       </header>
 
       <main>
-        <button onClick={testPush}>Test push</button>
         {
           currentPage === 1 ?
           <LandingPage 
@@ -93,12 +82,17 @@ function App() {
             setCurrentPage= {setCurrentPage}
             setScore= {setScore}
             highScoreArray= {highScoreArray}
+            setHighScoreArray= {setHighScoreArray}
             /> :
           ""
         }
         {
           currentPage === 4 ?
-          <HighScore /> :
+          <HighScore 
+          setScore ={setScore}
+          highScoreArray= {highScoreArray}
+          setCurrentPage= {setCurrentPage}
+          /> :
           ""
         }
       </main>
