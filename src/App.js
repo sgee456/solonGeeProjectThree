@@ -46,7 +46,7 @@ function App() {
     <div className="App">
       <header>
         <div className="wrapper">
-          <h1>Trivia App</h1> 
+          <h1>Trivia Time!</h1> 
           {
             currentPage === 1?
             <p>Choose what kind of questions you want in your quiz. <br/>Easy questions are worth 3 points, <br/>medium are worth 4 points, <br/> and hard are worth 5 points. </p>:

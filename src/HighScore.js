@@ -5,18 +5,24 @@ function HighScore({setScore, highScoreArray, setCurrentPage}) {
     };
     
     return(
-        <div className="highScoreContainer">
-            <h2>High Score:</h2>
-            <ol>{
-                highScoreArray.map((scoreObj) =>{
-                    return(
-                        <li key={scoreObj.scoreKey}>
-                            <p>{scoreObj.userName}: {scoreObj.userScore} </p>
-                        </li>
-                    );
-                })}
-            </ol>
-            <button onClick={handleReset}>Play again?</button>
+        <div className="wrapper">
+            <div className="highScoreContainer">
+                <h2>High Score:</h2>
+                <div className="innerWrapper">
+                    <ol>{
+                        highScoreArray.map((scoreObj, index) =>{
+                            return(
+                                <li key={scoreObj.scoreKey}>
+                                    <p><span classname="bold">{index + 1}. </span>{scoreObj.userName} </p>
+                                    <p>{scoreObj.userScore} {scoreObj.userScore === 1?"point": "points"}</p>
+                                </li>
+                            );
+                        })}
+                    </ol>
+                </div>
+                
+                <button onClick={handleReset}>Play again?</button>
+            </div>
         </div>
     );
 }

@@ -46,7 +46,7 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
         <div className="finalScoreContainer wrapper">  
             <p>You scored {score} out of {quizLength} questions.</p>
             {
-                (highScoreArray.length === 0 || score > highScoreArray[highScoreArray.length - 1].userScore) && !submitted?
+                (highScoreArray.length < 10 || score > highScoreArray[highScoreArray.length - 1].userScore) && !submitted?
             (<form 
                 className="highScoreSubmit" 
                 onSubmit={(event) => {checkHighScore(event, score, highScoreArray)}}
@@ -56,7 +56,7 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
                     type="text" 
                     id="changeScore"
                     value={name}
-                    maxLength="10"
+                    maxLength="7"
                     onChange={(e) => setName(e.target.value)}
                 />
                 <button type="submit">Submit High Score</button>
