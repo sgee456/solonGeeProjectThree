@@ -42,11 +42,14 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
         }
     }
 
+    //only makes high score submittable if submit hasn't been clicked yet, and if there are either less than 10 high scores or if the userScore is higher than the lowest score on the list
+    const submitAllowed = (highScoreArray.length < 10 || score > highScoreArray[highScoreArray.length - 1].userScore) && !submitted;
+
     return(
         <div className="finalScoreContainer wrapper">  
             <p>You scored {score} out of {quizLength} questions.</p>
             {
-                (highScoreArray.length < 10 || score > highScoreArray[highScoreArray.length - 1].userScore) && !submitted?
+                submitAllowed?
             (<form 
                 className="highScoreSubmit" 
                 onSubmit={(event) => {checkHighScore(event, score, highScoreArray)}}
@@ -63,7 +66,13 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
             </form>):
             ""
             }
-            <button className="viewHighScore" onClick={handleHighScore}>See High Score</button>
+
+            {
+                //show high score only if the user has submitted high score or there is no option to submit/ no new high score
+                submitted || !submitAllowed?
+                <button className="viewHighScore" onClick={handleHighScore}>See High Score</button>:
+                ""
+            }
             <button className="playAgain" onClick={handleReset}>Play Again?</button>
         </div>
     );
