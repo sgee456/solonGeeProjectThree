@@ -49,7 +49,7 @@ function App() {
           <h1>Trivia Time!</h1> 
           {
             currentPage === 1?
-            <p>Choose what kind of questions you want in your quiz. <br/>Easy questions are worth 3 points, <br/>medium are worth 4 points, <br/> and hard are worth 5 points. </p>:
+            <p>Select the questions you want in your quiz below.</p>:
             ""
           }
         </div>
@@ -99,7 +99,7 @@ function App() {
 
       <footer>
         <div className="wrapper">
-          <p>Made at <a href="https://junocollege.com/">Juno College</a>, using the <a href="https://opentdb.com/api_config.php">Open Trivia Database</a></p>
+          <p>Made at <a href="https://junocollege.com/">Juno College</a> by Solon Gee, using the <a href="https://opentdb.com/api_config.php">Open Trivia Database</a></p>
         </div>
       </footer>
     </div>
