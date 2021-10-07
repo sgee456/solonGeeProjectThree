@@ -67,7 +67,7 @@ function App() {
         {
           currentPage === 2 ?
           <Quiz 
-            quizInfo= {currentQuiz} 
+            currentQuiz= {currentQuiz} 
             setCurrentPage={setCurrentPage}
             currentPage= {currentPage}
             setScore={setScore}
@@ -108,39 +108,38 @@ function App() {
 
 export default App;
 
+//App Overview
 
-//The App has three main components: 
+//The App has four main components: 
 // 1. LandingPage
 // 2. Quiz
 // 3.FinalScore
+// 4.HighScore
 //the state of a currentPage variable in App determines which one is rendered on the page
 //to cycle between each, the state of currentPage is changed
 
 
 // Steps
 
+//when app is initialized, database subscription is established in order to get saved high scores. Loop through this data object and create an array where each item is ordered by score and save this into state. Everytime the database is updated, repeat this loop and save new ordered array to state.
 
-//mount LandingPage component
 //LandingPage shows name of app, short explanation, has Form component inside
 //Form component to narrow user choices for quiz
 //eg. how many questions to store, what category of questions 
-
 //using onSubmit on Form container, use user submitted data to make an api call to the Open Trivia API, unmount LandingPage component and mount Quiz component, which has Question and Score component inside
+//store json data of quiz questions from API call in currentQuiz (App state) for use in Quiz component
 
-//store json data from API call in a variable
-//Question component displays individual questions, selectable multiple choice answers and a submit button
-//json data is used to change the state of Question component, allowing new 		questions and answers to be displayed
-//When the user selects the answer via radio buttons and hits submit on submit button, "incorrect" or "correct" is displayed briefly, submit button is hidden/removed and then state of Question and Score components are updated to reset the page for the new question
+//Quiz component displays individual questions, selectable multiple choice answers and a submit button
+//When the user selects the answer via radio buttons and hits submit on submit button, "incorrect" or "correct" is displayed briefly, score is updated, submit button is hidden/removed and next question button revealed
 
 //Score component shows current score, as well as the current question # out of 	total questions
 //when the user answers questions, score and current question # are changed via state
 
 
-//when end of quiz is reached, unmount Quiz component and mount FinalScore component
+//when end of quiz is reached, Quiz component is unmounted and FinalScore component is mounted
 //FinalScore component will display the users final score, and an button to reset the page and play again
-//this button will unmount the FinalScore and re-mount LandingPage
-//also have buttons 
-//also have button to see HighScore component, and a form to submit i
+// also checks if there is a new high score using database information that was saved at the start of App
+//If there is, allows user to save that high score to the database, and deletes lowest score from database.
+//our subscription resends the new high score data back to us for display
 
-
-//Store the final state of the Score component in a Firebase database that acts as a scoreboard, display high score in a HighScore component in final score
+//HighScore displays the high score data.

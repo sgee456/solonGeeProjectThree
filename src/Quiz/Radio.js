@@ -13,7 +13,7 @@ function Radio({currentAnswerSet, setUserInput, userInput}) {
     return (
         <div className="answerContainer">
             {currentAnswerSet.map((question, index) => {
-                //set to allow html entities to properly display
+                //set to allow html entities to properly display in jsx
                 const answerString = `${question.answer}`;
                 const decodedAnswerString = decode(answerString);
     

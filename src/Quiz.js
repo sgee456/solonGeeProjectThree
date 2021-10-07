@@ -4,7 +4,7 @@ import {decode} from 'html-entities';
 import Radio from './Quiz/Radio.js';
 import Score from './Quiz/Score.js';
 
-function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
+function Quiz({currentQuiz, setCurrentPage, currentPage, setScore, score}) {
     
 
     const [currentQuestion, setCurrentQuestion] =useState(0);
@@ -13,7 +13,8 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
     const [buttonShow, setButtonShow] = useState(true);
     const [answerCorrect, setAnswerCorrect] = useState(false);
 
-    function randomizeQuestions({incorrect_answers, correct_answer}) {
+    //function that creates an array of multiple choice answers to display on the page by splicing the correct answer into the array of incorrect answers at a random spot
+    function randomizeAnswers({incorrect_answers, correct_answer}) {
         const answerArray = incorrect_answers.map( (incorrectAnswer) => {
             return {
                 answer: incorrectAnswer,
@@ -36,13 +37,14 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
         
     }
 
+    //When currentQuestion changes, re-randomize answers
     useEffect(() => {
-        //only when current question changes do we want to rerandomize questions
-        const answerArray = randomizeQuestions(quizInfo[currentQuestion]);
+        const answerArray = randomizeAnswers(currentQuiz[currentQuestion]);
         setCurrentAnswerSet(answerArray);
-    }, [quizInfo, currentQuestion]);
+    }, [currentQuiz, currentQuestion]);
 
-
+    //when the user hits submit, userInput is checked to make sure that user has selected an option then calls checkAnswer
+    //alerts if unchecked
     function handleSubmit(event) {
         event.preventDefault();
     
@@ -57,11 +59,11 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
         } else if (userInput ==='answer3' && currentAnswerSet.length > 3) {
             checkAnswer(currentAnswerSet[3].isCorrect);
         } else {
-            //alerts if unchecked when currentAnswerSet changes length 
             alert('please select an option');
         }
     };
 
+    //checks if answer is correct, increments score (App state) if so. takes away submit button/ reveals next question button and shows correct or incorrect via answerCorrect 
     function checkAnswer(answer) {
         if (answer) {
             setScore(score + 1);
@@ -73,8 +75,9 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
         }
     };
 
+    //when the user clicks for next question, current question changes, submit button/ next question visibility toggled back. currentQuestion change causes randomizeAnswers to be called on new answer set 
     function handleNextButton(event) {
-        if (currentQuestion + 1 < quizInfo.length) {
+        if (currentQuestion + 1 < currentQuiz.length) {
             setCurrentQuestion(currentQuestion + 1);
             setButtonShow(true);
         } else {
@@ -82,11 +85,11 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
         }
     }
 
-    //sets html in order for html entities to work
-    const htmlQuestion = quizInfo[currentQuestion].question
+    //sets html in order for html entities to display in jsx
+    const htmlQuestion = currentQuiz[currentQuestion].question
     const decodedHtmlQuestion = decode(htmlQuestion)
 
-    const htmlCorrectAnswer = quizInfo[currentQuestion].correct_answer
+    const htmlCorrectAnswer = currentQuiz[currentQuestion].correct_answer
     const decodedHtmlAnswer = decode(htmlCorrectAnswer);
 
     return(
@@ -119,7 +122,7 @@ function Quiz({quizInfo, setCurrentPage, currentPage, setScore, score}) {
 
             <Score
                 score={score}
-                quizLength={quizInfo.length}
+                quizLength={currentQuiz.length}
                 currentQuestion={currentQuestion} />
         </>
     );

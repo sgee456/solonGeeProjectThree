@@ -11,12 +11,12 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
         setScore(0);
         setCurrentPage(1);
     };
-
+ 
     function handleHighScore() {
-        //check if score is above 
         setCurrentPage(4);
     }
 
+    //this function checks our current array of high scores, pushes the new high score to the database, and then deletes the lowest high score if there are already ten high score entries. This causes our database subscription to resend our updated high score value. This value is passed into orderDatabase() which saves an updated highScoreArray.
     function checkHighScore(event, score, highScoreArray) {
         event.preventDefault();
         const dbRef = ref(realtime); 
@@ -41,7 +41,7 @@ function FinalScore({score, quizLength, setCurrentPage, setScore, highScoreArray
         }
     }
 
-    //only makes high score submittable if submit hasn't been clicked yet, and if there are either less than 10 high scores or if the userScore is higher than the lowest score on the list
+    //only makes highScoreSubmit form visible if submit hasn't been clicked yet. Also, the form is only visible if there are either less than 10 high scores or if the userScore is higher than the lowest score on the list
     const submitAllowed = (highScoreArray.length < 10 || score > highScoreArray[highScoreArray.length - 1].userScore) && !submitted;
 
     return(
