@@ -13,7 +13,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [highScoreArray, setHighScoreArray] = useState([]);
 
-  //function that takes our database object that we get and pushes each object inside. the object with the highest userScore is at index 0 and the next lowest score is 1, etc. It should be a maximum length of 10
+  //A function that takes database object that is returned and pushes each object inside an array with a maximum length of 10. the object with the highest userScore is at index 0 and the next lowest score is 1, etc... this array is stored in highScoreArray and used to display high scores in HighScore
 
   const orderDatabase = (databaseObj) => {
     const highScore = [];
@@ -32,7 +32,7 @@ function App() {
     setHighScoreArray(highScore);
   };
 
-  //set up our database subscription, and call orderDatabase on the response object before passing it into state
+  //set up our database subscription, and call orderDatabase on the response object before passing it into state as an ordered array in highScoreArray.
   useEffect(() => {
     const dbRef = ref(realtime);
 
@@ -59,7 +59,7 @@ function App() {
         {
           currentPage === 1 ?
           <LandingPage 
-            setupQuiz ={setCurrentQuiz}
+            setCurrentQuiz ={setCurrentQuiz}
             setupPage ={setCurrentPage}
           /> :
           ""
@@ -107,3 +107,40 @@ function App() {
 }
 
 export default App;
+
+
+//The App has three main components: 
+// 1. LandingPage
+// 2. Quiz
+// 3.FinalScore
+//the state of a currentPage variable in App determines which one is rendered on the page
+//to cycle between each, the state of currentPage is changed
+
+
+// Steps
+
+
+//mount LandingPage component
+//LandingPage shows name of app, short explanation, has Form component inside
+//Form component to narrow user choices for quiz
+//eg. how many questions to store, what category of questions 
+
+//using onSubmit on Form container, use user submitted data to make an api call to the Open Trivia API, unmount LandingPage component and mount Quiz component, which has Question and Score component inside
+
+//store json data from API call in a variable
+//Question component displays individual questions, selectable multiple choice answers and a submit button
+//json data is used to change the state of Question component, allowing new 		questions and answers to be displayed
+//When the user selects the answer via radio buttons and hits submit on submit button, "incorrect" or "correct" is displayed briefly, submit button is hidden/removed and then state of Question and Score components are updated to reset the page for the new question
+
+//Score component shows current score, as well as the current question # out of 	total questions
+//when the user answers questions, score and current question # are changed via state
+
+
+//when end of quiz is reached, unmount Quiz component and mount FinalScore component
+//FinalScore component will display the users final score, and an button to reset the page and play again
+//this button will unmount the FinalScore and re-mount LandingPage
+//also have buttons 
+//also have button to see HighScore component, and a form to submit i
+
+
+//Store the final state of the Score component in a Firebase database that acts as a scoreboard, display high score in a HighScore component in final score

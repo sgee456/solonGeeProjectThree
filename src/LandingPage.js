@@ -1,11 +1,12 @@
 import {useState} from 'react';
 
-function LandingPage({setupQuiz, setupPage}) {
+function LandingPage({setCurrentQuiz, setupPage}) {
     const [number, setNumber] = useState("10");
     const [category, setCategory] = useState("all");
     const [difficulty, setDifficulty] = useState("all");
     const [type, setType] = useState("all");
 
+    //A function that makes a fetch call to the OpenTrivia api using user selection to add query parameters, then puts that data into setCurrentQuiz, which sets state in App component. Also handles if no results are returned by checking response length.
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -33,7 +34,7 @@ function LandingPage({setupQuiz, setupPage}) {
         .then(res => res.json())
         .then(jsonRes => {
             if (jsonRes.results.length !== 0) {
-                setupQuiz(jsonRes.results);
+                setCurrentQuiz(jsonRes.results);
                 setupPage(2);
             } else {
                 alert('There were no results for that search.');
