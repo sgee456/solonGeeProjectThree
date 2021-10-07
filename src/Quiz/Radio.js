@@ -5,6 +5,11 @@ function Radio({currentAnswerSet, setUserInput, userInput}) {
         setUserInput(event.target.value);
     };
 
+    function handleLabel(event) {
+        // sets the label so that on click it changes the radio button via userInput state
+        setUserInput(event.target.nextSibling.value);
+    }
+
     return (
         <div className="answerContainer">
             {currentAnswerSet.map((question, index) => {
@@ -15,7 +20,10 @@ function Radio({currentAnswerSet, setUserInput, userInput}) {
                 return(
     
                     <div className="choiceContainer" key={"choice" + index}>
-                        <label htmlFor={`answer${index}`}>{decodedAnswerString}</label>
+                        <label 
+                            htmlFor={`answer${index}`}
+                            onClick={handleLabel}
+                        >{decodedAnswerString}</label>
                         <input 
                             name="quizAnswer"
                             type="radio" 
