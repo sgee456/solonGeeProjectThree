@@ -18,18 +18,17 @@ function App() {
   const orderDatabase = (databaseObj) => {
     const highScore = [];
     
+    //creates an unordered highScore
     for (let scoreObj in databaseObj) {
       const newScoreObj = {...databaseObj[scoreObj], scoreKey: scoreObj};
-      //logic that determines where each newScoreObj is spliced into highScoreArray
-      //checks every possible spot in the array. When it finds a spot where it is above a number in userScore or the spot is undefined/ has no obj, it splices its value just before.
-      for (let i = 0; i < 9; i++) {
-        if (highScore[i] === undefined || highScore[i].userScore <= newScoreObj.userScore) {
-          highScore.splice(i, 0, newScoreObj);
-          i += 9;
-        }
-      }
+      highScore.push(newScoreObj);
     }
-    setHighScoreArray(highScore);
+
+    //ordered score from highest to lowest
+    const orderedHighScore = highScore.sort((firstScore, secondScore) => {
+      return secondScore.userScore - firstScore.userScore;
+    });
+    setHighScoreArray(orderedHighScore);
   };
 
   //set up our database subscription, and call orderDatabase on the response object before passing it into state as an ordered array in highScoreArray.
