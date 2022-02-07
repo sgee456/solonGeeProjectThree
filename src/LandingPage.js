@@ -31,7 +31,13 @@ function LandingPage({setCurrentQuiz, setupPage}) {
         url.search = new URLSearchParams(searchObj);
 
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+            if (res.ok === true) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
         .then(jsonRes => {
             if (jsonRes.results.length !== 0) {
                 setCurrentQuiz(jsonRes.results);
@@ -40,7 +46,8 @@ function LandingPage({setCurrentQuiz, setupPage}) {
                 alert('There were no results for that search.');
             }
             
-        });
+        })
+        .catch(err => console.log(err));
     };
 
     return(
